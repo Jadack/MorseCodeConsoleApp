@@ -1,0 +1,22 @@
+{
+  "name": "morsecode-consoleapp",
+  "version": "1.0.0",
+  "description": "ConsoleApp to implement MorseCode Library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jadack/MorseCodeConsoleApp.git"
+  },
+  "author": "Jack Pacheco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jadack/MorseCodeConsoleApp/issues"
+  },
+  "homepage": "https://github.com/Jadack/MorseCodeConsoleApp#readme",
+  "dependencies": {
+    "morse-code-lib": "^1.0.0"
+  }
+}
