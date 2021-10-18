@@ -2,11 +2,11 @@
   "name": "morsecode-consoleapp",
   "version": "1.0.0",
   "description": "ConsoleApp to implement MorseCode Library",
-  "main": "dist/app.js",
-  "types": "dist/index.d.ts",
+  "main": "src/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node dist/app.js"
+    "start": "tsc && node dist/app.js",
+    "package": "tsc -p . && pkg --targets linux,macos,win . --out-path package"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,13 @@
   },
   "devDependencies": {
     "@types/figlet": "^1.5.4",
-    "@types/node": "^16.10.3"
+    "@types/node": "^16.10.3",
+    "pkg": "^5.3.3"
+  },
+  "bin":{
+    "mc": "./dist/app.js"
+  },
+  "pkg": {
+    "scripts": "dist/**/*.js"
   }
 }

@@ -5,6 +5,8 @@
 
 # production
 /dist
+/MorseCode
+/package
 
 # IDE - VSCode
 .vscode/*
