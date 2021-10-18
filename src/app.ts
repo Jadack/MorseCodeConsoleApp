@@ -1,6 +1,8 @@
 import { MorseCode } from 'morse-code-lib';
-import * as readline from 'readline';
-import * as process from 'process';
+import readline from 'readline';
+import process from 'process';
+import chalk from 'chalk';
+import figlet from 'figlet';
 
 export class MorseCodeConsoleApp {
 
@@ -12,15 +14,16 @@ export class MorseCodeConsoleApp {
       input: process.stdin,
       output: process.stdout
     });
-  }
+  } 
 
   init() {
     console.clear();
+    console.log(chalk.magenta(figlet.textSync('MorseCode', {horizontalLayout: 'full'})));
     console.log('Bienvenido a MorseCode');
-    console.log('Seleccione una Opción');
-    console.log('1- Texto a Morse.');
-    console.log('2- Morse a Texto.');
-    console.log('3- Salir.');
+    console.log(chalk.green('Seleccione una Opción'));
+    console.log(chalk.green('1- Texto a Morse.'));
+    console.log(chalk.green('2- Morse a Texto.'));
+    console.log(chalk.green('3- Salir.'));
 
     this.readLine.question('Opción: ', (input: string) => {
       switch(input.trim()) {
@@ -40,7 +43,7 @@ export class MorseCodeConsoleApp {
 
   textToMorseMenu() {
     console.clear();
-    console.log('Texto a Morse');
+    console.log(chalk.magenta('Texto a Morse'));
     this.readLine.question('Ingresar Texto: ', (input: string) => {
       this.readLine.question('Ingresar Separador: ', (_input: string) => {
         _input === '' ? console.log(`${input} = ${this.morseCode.morseEncode(input)}`) : console.log(`${input} = ${this.morseCode.morseEncode(input, _input)}`);
@@ -66,23 +69,31 @@ export class MorseCodeConsoleApp {
   }
   morseToTextMenu() {
     console.clear();
-    console.log('Opción no disponible');
-    console.log(' ');
-    console.log('¿Qué desea hacer?');
-    console.log('1- Menú Principal.');
-    console.log('2- Salir.');
+    console.log(chalk.magenta('Morse a Texto'));
+    this.readLine.question('Ingresar Código Morse: ', (input: string) => {
+      console.log('-lc --lowerCase');
+      console.log('-uc --upperCase');
+      console.log('-pc --pascalCase');
+      this.readLine.question('Seleccionar Convención: ', (_input: string) => {
+        _input === '' ? console.log(`${input} = ${this.morseCode.morseDecode(input)}`) : console.log(`${input} = ${this.morseCode.morseDecode(input, _input)}`);
+        console.log(' ');
+        console.log('¿Desea Repetir?');
+        console.log('1- Si.');
+        console.log('2- No.');
 
-    this.readLine.question('Opción: ', (input: string) => {
-      switch(input.trim()) {
-        case '1':
-          this.init();
-          break;
-        case '2':
-          process.exit();
-          break;
-        default:
-          this.init();
-      }
+        this.readLine.question('Opción: ', (input: string) => {
+          switch(input.trim()) {
+            case '1':
+              this.morseToTextMenu();
+              break;
+            case '2':
+              this.init();
+              break;
+            default:
+              this.morseToTextMenu();
+          }
+        });
+      });
     });
   }
 }
